@@ -1,0 +1,129 @@
+version: '2'
+
+services:
+
+  # Rails application container
+  dec_webserver:
+    build: .
+    container_name: decidim_webserver
+    environment:
+      RAILS_ENV: development
+    ports:
+      - '3000:3000'
+    volumes:
+      - "decidim-rails-docker-sync:/workspace:nocopy"
+    # volumes_from:
+    #   - box
+    depends_on:
+      - decpg
+      # - redis
+      # - elasticsearch
+      #  - sidekiq
+    stdin_open: true
+    tty: true
+    command: bash -c "rm -f tmp/pids/server.pid && REDIS_URL='redis://redis:6379/0' rails server -b '0.0.0.0'"
+    # if you need to fix deps
+    # command: bash -c "bundle install && yarn install --check-files && rm -f tmp/pids/server.pid && REDIS_URL='redis://redis:6379/0' rails server -b '0.0.0.0'"
+
+  # box:
+  #   image: busybox
+  #   volumes:
+  #     - /box
+    
+  decpg:
+    image: postgres
+    volumes:
+      #- "decidim-pg-data-docker-sync:/var/lib/postgresql/data:nocopy"
+      - "./docker/data/postgres:/var/lib/postgresql/data"
+    environment:
+      POSTGRES_PASSWORD: postgres
+
+  # Db container
+  # db:
+  #   image: mysql
+  #   command: --default-authentication-plugin=mysql_native_password
+  #   restart: always
+  #   container_name: sprtincloud_db
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: root
+  #   volumes:
+  #     - "./docker/data/mysql:/var/lib/mysql"
+  #   ports:
+  #     - "3306:3306"
+
+  # Sidekiq container (rails application with custom command)
+  # sidekiq:
+  #   build: .
+  #   container_name: sprtincloud_sidekiq
+  #   depends_on:
+  #     - db
+  #     - redis
+  #   command: bash -c "bundle install && REDIS_URL='redis://redis:6379/0' bundle exec sidekiq "
+  #   environment:
+  #     RAILS_ENV: development
+  #   volumes:
+  #     - "sport-in-cloud-docker-sync:/workspace:nocopy"
+
+  # Redis db
+  dec_redis:
+    image: redis:2.8.7
+    ports:
+      - '6379:6379'
+    volumes:
+      - ./docker/data/redis:/var/lib/redis/data
+
+volumes:
+  decidim-rails-docker-sync:
+    external:
+      name: "decidim-rails-docker-sync"
+  # decidim-pg-data-docker-sync:
+  #   external:
+  #     name: "decidim-pg-data-docker-sync"
+    
+
+  # Elasticsearch container
+  # elasticsearch:
+  #   image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.6.0
+  #   volumes:
+  #     - es-data:/usr/share/elasticsearch/data
+
+  # Kibana, elasticsearch web interface
+  # kibana:
+  #   image: docker.elastic.co/kibana/kibana:6.6.0
+  #   ports:
+  #     - 5601:5601
+  #   depends_on:
+  #     - elasticsearch
+
+  # Test container, used to run rspec
+  # rspec:
+  #   build: .
+  #   command: bash -c "rake db:migrate && rspec"
+  #   environment:
+  #     RAILS_ENV: "${RSPEC_ENV}"
+  #     ON_DOCKER: 1
+  #   depends_on:
+  #     - test-db
+  #     - test-elasticsearch
+  #   volumes:
+  #     - ".:/workspace"
+
+  # Elastic search empty container used for rspec tests
+  # test-elasticsearch:
+  #   image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.6.0
+
+  # test Db container for rspec
+  # test-db:
+  #   image: postgres:9.3.24
+  #   restart: always
+  #   environment:
+  #     POSTGRES_DB: zpc_test
+
+# volumes:
+#   postgres-data:
+#     driver: local
+  # es-data:
+  #   driver: local
+  # redis-data:
+  #   driver: local
+
