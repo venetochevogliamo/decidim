@@ -19,13 +19,15 @@ RUN apt-get clean autoclean \
     && apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/* /var/lib/dpkg /var/lib/cache
 
+RUN git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+RUN echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+
 #Cache bundle install
 WORKDIR /workspace
-RUN gem install rails
-RUN gem install capistrano
+RUN gem install rails capistrano bundler ed25519 bcrypt_pbkdf
 # Rails application
 ENV APP_ROOT /workspace
-ENV BUNDLE_PATH /box
+
 RUN mkdir -p $APP_ROOT
 WORKDIR $APP_ROOT
 COPY . $APP_ROOT

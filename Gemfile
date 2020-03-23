@@ -29,6 +29,11 @@ group :development do
   gem "web-console", "~> 3.5"
   gem "capistrano", "~> 3.10", require: false
   gem "capistrano-rails", "~> 1.3", require: false
+  gem 'capistrano-rbenv', '~> 2.1', require: false
+  gem 'capistrano-rvm'
+  gem 'capistrano-bundler', '~> 1.6', require: false
+  gem 'capistrano-rails-console', require: false
+  gem 'capistrano3-puma', require: false
 end
 
 group :production do
@@ -36,5 +41,4 @@ group :production do
   gem 'delayed_job_active_record'
   gem "daemons"
 end
-
 

@@ -14,8 +14,11 @@
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
+/.ssh/
+
 !/log/.keep
 !/tmp/.keep
+!/.ssh/.keep
 
 # Ignore uploaded files in development
 /storage/*
@@ -37,3 +40,7 @@ public/uploads
 
 .docker-sync
 docker/data/postgres/*
+
+/db/*.sql
+
+.DS_Store
