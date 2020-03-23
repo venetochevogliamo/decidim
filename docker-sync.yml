@@ -1,0 +1,13 @@
+version: "2"
+
+options:
+  verbose: false
+syncs:
+  decidim-rails-docker-sync: # name of the intermediary sync volume
+    src: './' # host source directory
+    sync_userid: 1000 # giving permissions to www-data user (as defined in nginx and php-fpm Dockerfiles)
+    sync_strategy: 'native_osx' # for osx use 'native_osx', for windows use 'unison'
+
+    sync_excludes: ['.git', '.gitignore', '.idea', 'cypress','deployer','docker','.docker-sync','tmp'] # ignored directories
+  
+  

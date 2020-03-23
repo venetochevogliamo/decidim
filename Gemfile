@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-ruby RUBY_VERSION
+ruby "2.6.5"
 
 gem "decidim", "0.20.0"
 # gem "decidim-consultations", "0.20.0"
@@ -27,6 +27,13 @@ group :development do
   gem "spring", "~> 2.0"
   gem "spring-watcher-listen", "~> 2.0"
   gem "web-console", "~> 3.5"
+  gem "capistrano", "~> 3.10", require: false
+  gem "capistrano-rails", "~> 1.3", require: false
+  gem 'capistrano-rbenv', '~> 2.1', require: false
+  gem 'capistrano-rvm'
+  gem 'capistrano-bundler', '~> 1.6', require: false
+  gem 'capistrano-rails-console', require: false
+  gem 'capistrano3-puma', require: false
 end
 
 group :production do
@@ -34,5 +41,4 @@ group :production do
   gem 'delayed_job_active_record'
   gem "daemons"
 end
-
 
