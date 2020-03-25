@@ -6,8 +6,8 @@ Decidim.configure do |config|
 
   # Change these lines to set your preferred locales
   config.default_locale = :en
-  config.available_locales = [:en, :ca, :es]
-
+  config.available_locales = [:en, :ca, :es, :it]
+  
   # Geocoder configuration
   # config.geocoder = {
   #   static_map_url: "https://image.maps.cit.api.here.com/mia/1.6/mapview",

@@ -15,11 +15,11 @@
 /log/*
 /tmp/*
 /.ssh/
-
+/db-backups/
 !/log/.keep
 !/tmp/.keep
 !/.ssh/.keep
-
+!/db-backups/.keep
 # Ignore uploaded files in development
 /storage/*
 !/storage/.keep

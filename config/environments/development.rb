@@ -77,4 +77,6 @@ Rails.application.configure do
     :enable_starttls_auto => Rails.application.secrets.smtp_starttls_auto,
     :openssl_verify_mode => 'none'
   }
+config.action_mailer.raise_delivery_errors = false
+config.action_mailer.perform_deliveries = false
 end
