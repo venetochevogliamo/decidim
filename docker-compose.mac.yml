@@ -35,8 +35,18 @@ services:
     volumes:
       #- "decidim-pg-data-docker-sync:/var/lib/postgresql/data:nocopy"
       - "./docker/data/postgres:/var/lib/postgresql/data"
+    ports:
+      - 5432:5432
     environment:
       POSTGRES_PASSWORD: postgres
+
+  # dec_pgadmin:
+  #   image: dpage/pgadmin4
+  #   environment:
+  #     PGADMIN_DEFAULT_PASSWORD: postgres
+  #     PGADMIN_DEFAULT_EMAIL: admin@myserver.it
+  #   ports:
+  #     - '7777:80'
 
   # Db container
   # db:

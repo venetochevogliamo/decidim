@@ -1,6 +1,7 @@
 # The task assumes you have figaro application.yml config in Capistrano shared folder
 # https://github.com/laserlemon/figaro
 
+require 'date'
 require 'sshkit'
 
 namespace :db do
@@ -16,15 +17,21 @@ namespace :db do
 
       # # feel free to add required flags for pg_dump
       # # http://www.postgresql.org/docs/9.4/static/app-pgdump.html
-      
+
       within '~/' do
+        fname = "decidim_backup_#{Time.now.strftime('%Y-%m-%d-%H-%M-%S')}.sql"
+        fullname = "/home/rails/vcv/decidim/db-backups/" + fname;
+        
         execute :pg_dump,
-                "-W -U #{dbuser} -h #{dbhost} --format=plain --quote-all-identifiers",
-                "#{dbname} > \"/home/rails/vcv/decidim/db-backups/decidim_backup_$(date +%F_%R).sql\"",
+                "-W -U #{dbuser} -h #{dbhost} -F c", # --format=plain --quote-all-identifiers --clean --if-exists
+                "#{dbname} > \"#{fullname}\"",
                 interaction_handler: {
                   'Password: ' => "#{dbpass}\n"
                 }
+        download! fullname, 'db-backups/' + fname
+        execute :rm, "#{fullname}"
       end
+      
     end
   end
 
