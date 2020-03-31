@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/Platoniq/decidim-module-decidim_awesome
+  revision: 48327fc3c3cbfe3ff78e395c5e1c95cb96bb5c89
+  specs:
+    decidim-decidim_awesome (0.1)
+      decidim-admin (>= 0.20.0)
+      decidim-core (>= 0.20.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -781,6 +789,7 @@ DEPENDENCIES
   capistrano3-puma
   daemons
   decidim (= 0.20.0)
+  decidim-decidim_awesome!
   decidim-dev (= 0.20.0)
   delayed_job_active_record
   faker (~> 1.9)

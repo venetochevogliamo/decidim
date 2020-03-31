@@ -9,7 +9,7 @@ require 'capistrano/rvm'
 require 'capistrano/bundler'
 require 'capistrano/rails/console'
 require 'capistrano/rails/assets'
-require 'capistrano/puma'
+#require 'capistrano/puma'
 
 # require 'capistrano/rails/migrations'
 

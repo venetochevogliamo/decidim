@@ -35,7 +35,7 @@ namespace :db do
     end
   end
 
-  
+  # pg_restore -d decidim -U postgres -W -c -h 127.0.0.1 --no-owner --role=postgres  db-backups/decidim_backup_2020-03-25-16-47-16
   # extract password from figaro shared config file
   def dbconfig
     URI.parse(YAML::load(
