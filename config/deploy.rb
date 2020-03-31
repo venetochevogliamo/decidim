@@ -26,7 +26,7 @@ set :deploy_to, "/home/rails/vcv/decidim"
 append :linked_files, 'config/application.yml'
 
 # Default value for linked_dirs is []
-append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'storage'
+append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'storage', 'public/uploads'
 append :linked_dirs, '.bundle'
 # set :rbenv_type, :user
 # set :rbenv_ruby, '2.6.5'
