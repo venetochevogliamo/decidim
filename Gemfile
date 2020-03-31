@@ -15,6 +15,7 @@ gem "uglifier", "~> 4.1"
 
 gem "faker", "~> 1.9"
 gem "figaro"
+gem "decidim-decidim_awesome", git: "https://github.com/Platoniq/decidim-module-decidim_awesome"
 group :development, :test do
   gem "byebug", "~> 11.0", platform: :mri
 
